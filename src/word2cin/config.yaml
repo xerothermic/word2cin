@@ -1,0 +1,26 @@
+dataSources:
+    KauiokpooTaigiSutian:
+        type: ChhoeTaigiDatabase
+        path: "ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_KauiokpooTaigiSutian.csv"
+        parseMethods:
+            - parse_single_word_v2
+            - parse_single_word_from_phrase
+            - parse_simple_phrase
+            - parse_alternative_phrase
+            - parse_khiunn_khau2_tsha_phrase
+            - add_no_tones
+    iTaigiHoataiTuichiautian:
+        type: ChhoeTaigiDatabase
+        path: "ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_iTaigiHoataiTuichiautian.csv"
+        parseMethods:
+            - parse_single_word_v2
+            - parse_single_word_from_phrase
+            - parse_simple_phrase
+            - parse_alternative_phrase
+            - parse_khiunn_khau2_tsha_phrase
+            # - add_no_tones
+cinOutputs:
+    combo:
+        dataSources:
+            - KauiokpooTaigiSutian
+            - iTaigiHoataiTuichiautian
