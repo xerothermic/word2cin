@@ -45,8 +45,9 @@ class ParseSingleWord(ParseMethodBase):
         cin_list = []
 
         # Ignore KipInput with () / space and japanese
-        single_word_df = taigi_df[~taigi_df.KipInput.astype(
-            str).str.contains("\\(|/|-| |な")]
+        single_word_df = taigi_df[
+            taigi_df.KipInput.astype(str).str.contains("^[a-z][A-Z]")
+        ]
         for _idx, row in single_word_df.iterrows():
             k = self._get_key(row["KipInput"])
             if not k:
