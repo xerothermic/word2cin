@@ -5,7 +5,7 @@ import sys
 from word2cin.config_loader import create_config_from_yaml
 from word2cin.processors import process_data_sources
 
-logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
