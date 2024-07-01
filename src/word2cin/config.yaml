@@ -24,3 +24,18 @@ cinOutputs:
         dataSources:
             - KauiokpooTaigiSutian
             - iTaigiHoataiTuichiautian
+        ename: two-dict-tailo
+        cname: 台羅
+        selkey: qwdzxyv
+        out_filename: two-dict-tailo.cin
+        # out_dir: build/
+    combo:
+        dataSources:
+            - KauiokpooTaigiSutian
+            - iTaigiHoataiTuichiautian
+        ename: two-dict-tailo
+        cname: 台羅
+        selkey: qwdzxyv
+        out_filename: two-dict-tailo-debug.cin
+        # out_dir: build/
+        include_source: True

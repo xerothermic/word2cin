@@ -2,6 +2,7 @@ import logging
 from pathlib import Path
 import sys
 
+from word2cin.cin_printer import save_cin
 from word2cin.config_loader import create_config_from_yaml
 from word2cin.processors import process_data_sources
 
@@ -18,7 +19,7 @@ def main():
     cfg = create_config_from_yaml(get_yaml_path())
     logger.info(cfg)
     cin_data = process_data_sources(cfg.data_sources)
-    # save_cin(cfg, cin_data)
+    save_cin(cfg.cin_printer_cfgs, cin_data)
 
 
 if __name__ == "__main__":

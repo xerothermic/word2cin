@@ -1,7 +1,6 @@
 from dataclasses import dataclass, field
 from enum import Enum
 import logging
-from typing import List
 import yaml
 
 from word2cin.parsers import PARSE_METHODS
@@ -19,17 +18,24 @@ class DataSource:
     name: str
     type: DataSourceType
     path: str
-    parse_methods: List[ParseMethodBase]
+    parse_methods: list[ParseMethodBase]
 
 @dataclass
 class CinPrinterConfig:
     name: str
-    data_sources: List[DataSource]
+    data_sources: list[DataSource]
+    ename: str
+    cname: str
+    selkey: str
+    out_filename: str
+    out_dir: str
+    # include data source to chardef block. Mainly for debugging
+    include_source: bool = False
 
 @dataclass
 class Config:
-    data_sources: List[DataSource]
-    cin_printer_cfgs: List[CinPrinterConfig]
+    data_sources: list[DataSource]
+    cin_printer_cfgs: list[CinPrinterConfig]
 
 
 def load_yaml_config(path) -> dict:
@@ -41,7 +47,8 @@ def load_yaml_config(path) -> dict:
             raise e
     return res
 
-def get_parse_methods(data_source_dict) -> List[ParseMethodBase]:
+
+def get_parse_methods(data_source_dict) -> list[ParseMethodBase]:
     parse_methods = []
     if "parseMethods" not in data_source_dict:
         raise ValueError(" should include parseMethods")
@@ -53,7 +60,7 @@ def get_parse_methods(data_source_dict) -> List[ParseMethodBase]:
     return parse_methods
     
 
-def get_data_sources(yaml_dict) -> List[DataSource]:
+def get_data_sources(yaml_dict) -> list[DataSource]:
     data_sources = []
     if "dataSources" not in yaml_dict:
         raise ValueError("yaml_dict should include dataSources")
@@ -73,9 +80,24 @@ def get_data_sources(yaml_dict) -> List[DataSource]:
     return data_sources
 
 
-def get_cin_printer_cfgs(yaml_dict) -> CinPrinterConfig:
-    return CinPrinterConfig(name="dummy", data_sources=[])
-    # raise NotImplementedError()
+def get_cin_printer_cfgs(yaml_dict) -> list[CinPrinterConfig]:
+    if "cinOutputs" not in yaml_dict:
+        raise ValueError("yaml_dict should include cinOutputs")
+    cin_output_yaml_cfgs = yaml_dict["cinOutputs"]
+    cfgs = []
+    for cfg_name, yaml_cfg in cin_output_yaml_cfgs.items():
+        cfg = CinPrinterConfig(
+            name=cfg_name,
+            data_sources=yaml_cfg["dataSources"],
+            ename=yaml_cfg["ename"],
+            cname=yaml_cfg["cname"],
+            selkey=yaml_cfg["selkey"],
+            out_filename=yaml_cfg["out_filename"],
+            out_dir=yaml_cfg.get("out_dir", "build/"),
+            include_source=yaml_cfg.get("include_source", False),
+        )
+        cfgs.append(cfg)
+    return cfgs
 
 
 def create_config(yaml_dict) -> Config:
