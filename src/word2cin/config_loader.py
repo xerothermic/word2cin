@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from enum import Enum
 import logging
 import yaml
@@ -10,9 +10,9 @@ logger = logging.getLogger(__name__)
 
 
 class DataSourceType(Enum):
-    Unknown = 0
-    ChhoeTaigiDatabase = 1
-    GoogleSheet = 2
+    UNKNOWN = 0
+    CHHOE_TAIGI_DATABASE = 1
+    GOOGLE_SHEET = 2
 
 
 @dataclass

@@ -1,6 +1,4 @@
-from collections import defaultdict
 import logging
-from typing import List
 import pandas as pd
 from word2cin.cin_entry import CinEntry
 from word2cin.parsers.parse_method_base import ParseMethodBase

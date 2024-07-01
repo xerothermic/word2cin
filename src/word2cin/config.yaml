@@ -1,6 +1,6 @@
 dataSources:
     KauiokpooTaigiSutian:
-        type: ChhoeTaigiDatabase
+        type: CHHOE_TAIGI_DATABASE
         path: "ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_KauiokpooTaigiSutian.csv"
         parseMethods:
             - parse_single_word_v2
@@ -10,7 +10,7 @@ dataSources:
             - parse_khiunn_khau2_tsha_phrase
             - add_no_tones
     iTaigiHoataiTuichiautian:
-        type: ChhoeTaigiDatabase
+        type: CHHOE_TAIGI_DATABASE
         path: "ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_iTaigiHoataiTuichiautian.csv"
         parseMethods:
             - parse_single_word_v2

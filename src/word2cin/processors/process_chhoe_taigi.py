@@ -1,6 +1,4 @@
-from collections import defaultdict
 import logging
-from typing import List
 
 import pandas as pd
 
