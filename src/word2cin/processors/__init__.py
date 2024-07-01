@@ -6,6 +6,7 @@ from word2cin.processors.process_chhoe_taigi import process_chhoe_taigi_data
 
 logger = logging.getLogger(__name__)
 
+
 def process_data_sources(data_sources: List[DataSource]):
     cin_data_dict = {}
     for data_source in data_sources:

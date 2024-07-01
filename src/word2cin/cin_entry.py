@@ -3,6 +3,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 @dataclass
 class CinEntry:
     """ Represent a cin file entry """
@@ -23,7 +24,8 @@ class CinEntry:
         self.weight = self.weight + other.weight
         self.src_name = self._merge_str(self.src_name, other.src_name)
         self.src_col = self._merge_str(self.src_col, other.src_col)
-        self.parse_method = self._merge_str(self.parse_method, other.parse_method)
+        self.parse_method = self._merge_str(
+            self.parse_method, other.parse_method)
         self.comment = self._merge_str(self.comment, other.comment)
         return self
 
@@ -43,6 +45,6 @@ class CinEntry:
             set(self.parse_method.split(";")) == set(o.parse_method.split(";")) and
             set(self.comment.split(";")) == set(o.comment.split(";"))
         )
-    
+
     def __hash__(self) -> int:
         return hash(self.key + self.value + str(self.weight))

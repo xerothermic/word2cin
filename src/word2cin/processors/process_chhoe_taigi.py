@@ -9,13 +9,14 @@ from word2cin.config_loader import DataSource
 
 logger = logging.getLogger(__name__)
 
+
 def load_chhoe_taigi_dataframe(path: str):
     df = pd.read_csv(path)
     return df
 
 
 def dedup_cin_list(cin_list: list[CinEntry]) -> list[CinEntry]:
-    cin_map: dict[(str,str), CinEntry] = {}
+    cin_map: dict[(str, str), CinEntry] = {}
     for e in cin_list:
         key = (e.key, e.value)
         exist = cin_map.get(key)

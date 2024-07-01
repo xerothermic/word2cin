@@ -1,5 +1,4 @@
 
-from collections import defaultdict
 import logging
 import pandas as pd
 from word2cin.cin_entry import CinEntry
@@ -39,11 +38,15 @@ class ParseSingleWord(ParseMethodBase):
             weight=0,
         )
 
-    def parse(self, data_source_name: str, taigi_df: pd.DataFrame) -> list[CinEntry]:
+    def parse(
+            self,
+            data_source_name: str,
+            taigi_df: pd.DataFrame) -> list[CinEntry]:
         cin_list = []
 
         # Ignore KipInput with () / space and japanese
-        single_word_df = taigi_df[~taigi_df.KipInput.astype(str).str.contains("\\(|/|-| |な")]
+        single_word_df = taigi_df[~taigi_df.KipInput.astype(
+            str).str.contains("\\(|/|-| |な")]
         for _idx, row in single_word_df.iterrows():
             k = self._get_key(row["KipInput"])
             if not k:

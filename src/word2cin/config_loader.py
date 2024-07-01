@@ -8,10 +8,12 @@ from word2cin.parsers.parse_method_base import ParseMethodBase
 
 logger = logging.getLogger(__name__)
 
+
 class DataSourceType(Enum):
     Unknown = 0
     ChhoeTaigiDatabase = 1
     GoogleSheet = 2
+
 
 @dataclass
 class DataSource:
@@ -19,6 +21,7 @@ class DataSource:
     type: DataSourceType
     path: str
     parse_methods: list[ParseMethodBase]
+
 
 @dataclass
 class CinPrinterConfig:
@@ -31,6 +34,7 @@ class CinPrinterConfig:
     out_dir: str
     # include data source to chardef block. Mainly for debugging
     include_source: bool = False
+
 
 @dataclass
 class Config:
@@ -54,11 +58,12 @@ def get_parse_methods(data_source_dict) -> list[ParseMethodBase]:
         raise ValueError(" should include parseMethods")
     for parse_method_name in data_source_dict["parseMethods"]:
         if parse_method_name not in PARSE_METHODS:
-            logger.warning(f"{parse_method_name} does not have an implementation yet.")
+            logger.warning(
+                f"{parse_method_name} does not have an implementation yet.")
             continue
         parse_methods.append(PARSE_METHODS[parse_method_name])
     return parse_methods
-    
+
 
 def get_data_sources(yaml_dict) -> list[DataSource]:
     data_sources = []

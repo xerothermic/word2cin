@@ -28,7 +28,8 @@ def test_dedup_cin_list():
     new_cin_list = dedup_cin_list(cin_list)
     assert len(new_cin_list) == 1
     assert new_cin_list[0] == cin_list[0]
-    # same key and value should collapse, but the metadata should concat with ";", weight should be sum'ed
+    # same key and value should collapse, but the metadata should concat with
+    # ";", weight should be sum'ed
     cin_list = [
         CinEntry(
             "key",
@@ -50,13 +51,13 @@ def test_dedup_cin_list():
         ),
     ]
     expected_cin = CinEntry(
-            "key",
-            "value",
-            "src_name1;src_name2",
-            "src_col1;src_col2",
-            "parse_method1;parse_method2",
-            11.0,
-            "comment1;comment2"
+        "key",
+        "value",
+        "src_name1;src_name2",
+        "src_col1;src_col2",
+        "parse_method1;parse_method2",
+        11.0,
+        "comment1;comment2"
     )
     new_cin_list = dedup_cin_list(cin_list)
     assert len(new_cin_list) == 1
