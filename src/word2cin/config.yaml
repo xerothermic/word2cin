@@ -47,27 +47,109 @@ dataSources:
         postProcessing:
             - convert_key_to_lower_case
             - add_no_tone
+            # TODO: implement drop_illegal_words to ignore word contains vxyz etc.
+            # - drop_illegal_words
+    EmbreeTaiengSutian:
+        type: CHHOE_TAIGI_DATABASE
+        path: "ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_EmbreeTaiengSutian.csv"
+        parseMethods:
+            - parse_single_word_from_phrase
+            - parse_simple_phrase
+        postProcessing:
+            - convert_key_to_lower_case
+            - add_no_tone
+            # - drop_illegal_words
+    KamJitian:
+        type: CHHOE_TAIGI_DATABASE
+        path: "ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_KamJitian.csv"
+        parseMethods:
+            - parse_single_word_v2
+            # TODO: below didn't catch any entries, debug if there is an issue.
+            # - parse_single_word_from_phrase
+            # - parse_simple_phrase
+            # - parse_bun5_peh_im_phrase
+            # - parse_khiunn_khau2_tsha_phrase
+        postProcessing:
+            - convert_key_to_lower_case
+            - add_no_tone
+    MaryknollTaiengSutian:
+        type: CHHOE_TAIGI_DATABASE
+        path: "ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_MaryknollTaiengSutian.csv"
+        parseMethods:
+            - parse_single_word_v2
+            - parse_single_word_from_phrase
+            - parse_simple_phrase
+            - parse_khiunn_khau2_tsha_phrase
+        postProcessing:
+            - convert_key_to_lower_case
+            - add_no_tone
+    TaioanPehoeKichhooGiku:
+        type: CHHOE_TAIGI_DATABASE
+        path: "ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_TaioanPehoeKichhooGiku.csv"
+        parseMethods:
+            - parse_single_word_v2
+            - parse_single_word_from_phrase
+            - parse_simple_phrase
+        postProcessing:
+            - convert_key_to_lower_case
+            - add_no_tone
+    TaioanSitbutMialui:
+        type: CHHOE_TAIGI_DATABASE
+        path: "ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_TaioanSitbutMialui.csv"
+        parseMethods:
+            - parse_single_word_v2
+            - parse_single_word_from_phrase
+            - parse_simple_phrase
+        postProcessing:
+            - convert_key_to_lower_case
+            - add_no_tone
 cinOutputs:
-    four-dict:
+    # new-dict:
+    #     dataSources:
+    #         # - KauiokpooTaigiSutian
+    #         # - iTaigiHoataiTuichiautian
+    #         # - TaihoaSoanntengTuichiautian
+    #         # - TaijitToaSutian
+    #         # - EmbreeTaiengSutian
+    #         # - KamJitian
+    #         # - MaryknollTaiengSutian
+    #         # - TaioanPehoeKichhooGiku
+    #         - TaioanSitbutMialui
+    #     ename: new-dict-tailo
+    #     cname: 台羅
+    #     selkey: qwdzxyv
+    #     out_filename: new-dict-tailo.cin
+    #     # out_dir: build/
+    nine-dict:
         dataSources:
             - KauiokpooTaigiSutian
             - iTaigiHoataiTuichiautian
             - TaihoaSoanntengTuichiautian
             - TaijitToaSutian
-        ename: four-dict-tailo
+            - EmbreeTaiengSutian
+            - KamJitian
+            - MaryknollTaiengSutian
+            - TaioanPehoeKichhooGiku
+            - TaioanSitbutMialui
+        ename: nine-dict-tailo
         cname: 台羅
         selkey: qwdzxyv
-        out_filename: four-dict-tailo.cin
+        out_filename: nine-dict-tailo.cin
         # out_dir: build/
-    four-dict-debug:
+    nine-dict-debug:
         dataSources:
             - KauiokpooTaigiSutian
             - iTaigiHoataiTuichiautian
             - TaihoaSoanntengTuichiautian
             - TaijitToaSutian
-        ename: four-dict-tailo
+            - EmbreeTaiengSutian
+            - KamJitian
+            - MaryknollTaiengSutian
+            - TaioanPehoeKichhooGiku
+            - TaioanSitbutMialui
+        ename: nine-dict-tailo-debug
         cname: 台羅
         selkey: qwdzxyv
-        out_filename: four-dict-tailo-debug.cin
+        out_filename: nine-dict-tailo-debug.cin
         # out_dir: build/
         include_source: True
