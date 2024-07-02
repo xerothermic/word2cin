@@ -10,5 +10,5 @@ class ParseMethodBase(ABC):
     def parse(
             self,
             data_source_name: str,
-            dataframe: pd.DataFrame) -> list[CinEntry]:
+            taigi_df: pd.DataFrame) -> list[CinEntry]:
         return

@@ -39,7 +39,7 @@ def print_cin_entries(
     filtered_cin_data.sort(key=lambda c: c.weight)
     for c in filtered_cin_data:
         if include_source:
-            print(f"{c.key} {c.value};{c.src_name};{c.parse_method}", file=fp)
+            print(f"{c.key} {c.value};{c.src_name};{c.parse_method};{c.src_col}", file=fp)
         else:
             print(f"{c.key} {c.value}", file=fp)
 

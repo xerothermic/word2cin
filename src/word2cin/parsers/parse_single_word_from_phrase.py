@@ -55,7 +55,7 @@ class ParseSingleWordFromPhrase(ParseMethodBase):
                         kip_input_list,
                         kip_utf8_list))
             else:
-                logger.warning(
+                logger.debug(
                     f"{len(kip_input_list)=} != {len(kip_utf8_list)=}")
 
             if isinstance(kip_hanlo_list, float):
@@ -69,5 +69,5 @@ class ParseSingleWordFromPhrase(ParseMethodBase):
                         kip_input_list,
                         kip_hanlo_list))
             else:
-                logger.warning(f"{kip_input_list} != {kip_hanlo_list}")
+                logger.debug(f"{kip_input_list} != {kip_hanlo_list}")
         return cin_list

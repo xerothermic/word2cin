@@ -57,10 +57,12 @@ class ParseSingleWord(ParseMethodBase):
             cin_entry = self._get_cin_from_unicode(data_source_name, k, v1)
             cin_list.append(cin_entry)
             v2 = row["HanLoTaibunKip"]
-            if v2.strip() != "":
+            if not isinstance(v2, str):
+                logger.warning(f"HanLoTaibunKip is not str for {row=}")
+            elif v2.strip() == "":
+                logger.debug(f"{k} has no HanLoTaibunKip")
+            else:
                 cin_entry = self._get_cin_from_hanlo(data_source_name, k, v2)
                 cin_list.append(cin_entry)
-            else:
-                logger.debug(f"{k} has no HanLoTaibunKip")
 
         return cin_list

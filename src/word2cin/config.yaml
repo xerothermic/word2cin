@@ -6,7 +6,7 @@ dataSources:
             - parse_single_word_v2
             - parse_single_word_from_phrase
             - parse_simple_phrase
-            - parse_alternative_phrase
+            - parse_bun5_peh_im_phrase
             - parse_khiunn_khau2_tsha_phrase
         postProcessing:
             - convert_key_to_lower_case
@@ -18,28 +18,56 @@ dataSources:
             - parse_single_word_v2
             - parse_single_word_from_phrase
             - parse_simple_phrase
-            - parse_alternative_phrase
+            - parse_bun5_peh_im_phrase
+            - parse_khiunn_khau2_tsha_phrase
+        postProcessing:
+            - convert_key_to_lower_case
+            - add_no_tone
+    TaihoaSoanntengTuichiautian:
+        type: CHHOE_TAIGI_DATABASE
+        path: "ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_TaihoaSoanntengTuichiautian.csv"
+        parseMethods:
+            - parse_single_word_v2
+            - parse_single_word_from_phrase
+            - parse_simple_phrase
+            - parse_bun5_peh_im_phrase
+            - parse_khiunn_khau2_tsha_phrase
+        postProcessing:
+            - convert_key_to_lower_case
+            - add_no_tone
+    TaijitToaSutian:
+        type: CHHOE_TAIGI_DATABASE
+        path: "ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_TaijitToaSutian.csv"
+        parseMethods:
+            - parse_single_word_v2
+            - parse_single_word_from_phrase
+            - parse_simple_phrase
+            - parse_bun5_peh_im_phrase
             - parse_khiunn_khau2_tsha_phrase
         postProcessing:
             - convert_key_to_lower_case
             - add_no_tone
 cinOutputs:
-    combo:
+    four-dict:
         dataSources:
             - KauiokpooTaigiSutian
             - iTaigiHoataiTuichiautian
-        ename: two-dict-tailo
+            - TaihoaSoanntengTuichiautian
+            - TaijitToaSutian
+        ename: four-dict-tailo
         cname: 台羅
         selkey: qwdzxyv
-        out_filename: two-dict-tailo.cin
+        out_filename: four-dict-tailo.cin
         # out_dir: build/
-    combo-debug:
+    four-dict-debug:
         dataSources:
             - KauiokpooTaigiSutian
             - iTaigiHoataiTuichiautian
-        ename: two-dict-tailo
+            - TaihoaSoanntengTuichiautian
+            - TaijitToaSutian
+        ename: four-dict-tailo
         cname: 台羅
         selkey: qwdzxyv
-        out_filename: two-dict-tailo-debug.cin
+        out_filename: four-dict-tailo-debug.cin
         # out_dir: build/
         include_source: True
