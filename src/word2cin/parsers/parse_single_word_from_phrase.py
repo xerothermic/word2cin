@@ -47,7 +47,6 @@ class ParseSingleWordFromPhrase(ParseMethodBase):
         for _idx, row in single_phrase_df.iterrows():
             kip_input_list = row["KipInput"].split("-")
             kip_utf8_list = row["KipUnicode"].split("-")
-            kip_hanlo_list = row["HanLoTaibunKip"]
             if len(kip_input_list) == len(kip_utf8_list):
                 cin_list.extend(
                     self._put_kip_unicode(
@@ -58,10 +57,13 @@ class ParseSingleWordFromPhrase(ParseMethodBase):
                 logger.debug(
                     f"{len(kip_input_list)=} != {len(kip_utf8_list)=}")
 
-            if isinstance(kip_hanlo_list, float):
-                logger.warning(
-                    f"HanLoTaibunKip has unexpected float type. {kip_hanlo_list}")
+            if "HanLoTaibunKip" not in row:
                 continue
+            if isinstance(row["HanLoTaibunKip"], float):
+                logger.warning(
+                    f"HanLoTaibunKip has unexpected float type for {row=}")
+                continue
+            kip_hanlo_list = row["HanLoTaibunKip"]
             if len(kip_input_list) == len(kip_hanlo_list):
                 cin_list.extend(
                     self._put_kip_hanlo(

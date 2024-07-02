@@ -29,6 +29,11 @@ def parse_method_loop(data_source, taigi_df) -> list[CinEntry]:
     cin_list = []
     for parse_method_cls in data_source.parse_methods:
         cin_data = parse_method_cls().parse(data_source.name, taigi_df)
+        is_empty = len(cin_data) == 0
+        logger.log(
+            logging.WARNING if is_empty else logging.INFO,
+            f"{parse_method_cls.__name__} got {len(cin_data)} entries"
+        )
         logger.debug(cin_data)
         cin_list.extend(cin_data)
     return cin_list
