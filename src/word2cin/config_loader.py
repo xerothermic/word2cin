@@ -5,6 +5,8 @@ import yaml
 
 from word2cin.parsers import PARSE_METHODS
 from word2cin.parsers.parse_method_base import ParseMethodBase
+from word2cin.post_processing import POST_PROCESSING_OPTIONS
+from word2cin.post_processing.post_processing_base import PostProcessingBase
 
 logger = logging.getLogger(__name__)
 
@@ -21,6 +23,7 @@ class DataSource:
     type: DataSourceType
     path: str
     parse_methods: list[ParseMethodBase]
+    post_processing: list[PostProcessingBase]
 
 
 @dataclass
@@ -65,6 +68,19 @@ def get_parse_methods(data_source_dict) -> list[ParseMethodBase]:
     return parse_methods
 
 
+def get_post_processing(data_source_dict) -> list[PostProcessingBase]:
+    post_processing = []
+    if "postProcessing" not in data_source_dict:
+        return post_processing
+    for post_processing_option in data_source_dict["postProcessing"]:
+        if post_processing_option not in POST_PROCESSING_OPTIONS:
+            logger.warning(
+                f"{post_processing_option} does not have an implementation yet.")
+            continue
+        post_processing.append(POST_PROCESSING_OPTIONS[post_processing_option])
+    return post_processing
+
+
 def get_data_sources(yaml_dict) -> list[DataSource]:
     data_sources = []
     if "dataSources" not in yaml_dict:
@@ -79,7 +95,8 @@ def get_data_sources(yaml_dict) -> list[DataSource]:
             ds_name,
             DataSourceType[ds_vals["type"]],
             ds_vals["path"],
-            parse_methods
+            parse_methods,
+            get_post_processing(ds_vals),
         )
         data_sources.append(ds)
     return data_sources
@@ -101,6 +118,7 @@ def get_cin_printer_cfgs(yaml_dict) -> list[CinPrinterConfig]:
             out_dir=yaml_cfg.get("out_dir", "build/"),
             include_source=yaml_cfg.get("include_source", False),
         )
+        logger.info(f"CinPrinterConfig:{cfg}")
         cfgs.append(cfg)
     return cfgs
 

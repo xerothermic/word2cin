@@ -8,7 +8,9 @@ dataSources:
             - parse_simple_phrase
             - parse_alternative_phrase
             - parse_khiunn_khau2_tsha_phrase
-            - add_no_tones
+        postProcessing:
+            - convert_key_to_lower_case
+            - add_no_tone
     iTaigiHoataiTuichiautian:
         type: CHHOE_TAIGI_DATABASE
         path: "ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_iTaigiHoataiTuichiautian.csv"
@@ -18,7 +20,9 @@ dataSources:
             - parse_simple_phrase
             - parse_alternative_phrase
             - parse_khiunn_khau2_tsha_phrase
-            # - add_no_tones
+        postProcessing:
+            - convert_key_to_lower_case
+            - add_no_tone
 cinOutputs:
     combo:
         dataSources:
@@ -29,7 +33,7 @@ cinOutputs:
         selkey: qwdzxyv
         out_filename: two-dict-tailo.cin
         # out_dir: build/
-    combo:
+    combo-debug:
         dataSources:
             - KauiokpooTaigiSutian
             - iTaigiHoataiTuichiautian
