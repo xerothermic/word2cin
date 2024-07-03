@@ -31,7 +31,7 @@ class ParseSimplePhrase(ParseMethodBase):
             if "HanLoTaibunKip" not in row:
                 continue
             if not isinstance(row["HanLoTaibunKip"], str):
-                logger.warning(f"HanLoTaibunKip is not str for {row=}")
+                logger.debug(f"HanLoTaibunKip is not str for {row=}")
             elif row["HanLoTaibunKip"].strip() == "":
                 logger.debug(f"no HanLoTaibunKip for {row=}")
             else:

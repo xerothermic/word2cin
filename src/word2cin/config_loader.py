@@ -71,7 +71,7 @@ def get_parse_methods(data_source_dict) -> list[ParseMethodBase]:
         raise ValueError(" should include parseMethods")
     for parse_method_name in data_source_dict["parseMethods"]:
         if parse_method_name not in PARSE_METHODS or PARSE_METHODS[parse_method_name] is None:
-            logger.warning(
+            logger.info(
                 f"{parse_method_name} does not have an implementation yet.")
             continue
         parse_methods.append(PARSE_METHODS[parse_method_name])

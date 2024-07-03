@@ -17,7 +17,6 @@ def get_yaml_path():
 
 def main():
     cfg = create_config_from_yaml(get_yaml_path())
-    logger.info(cfg)
     cin_data = process_data_sources(cfg.data_sources)
     save_cin(cfg.cin_printer_cfgs, cin_data)
 

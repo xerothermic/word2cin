@@ -60,7 +60,7 @@ class ParseSingleWordFromPhrase(ParseMethodBase):
             if "HanLoTaibunKip" not in row:
                 continue
             if isinstance(row["HanLoTaibunKip"], float):
-                logger.warning(
+                logger.debug(
                     f"HanLoTaibunKip has unexpected float type for {row=}")
                 continue
             kip_hanlo_list = row["HanLoTaibunKip"]

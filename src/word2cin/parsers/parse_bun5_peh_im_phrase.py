@@ -17,7 +17,7 @@ class ParseBun5PehImPhrase(ParseMethodBase):
             kip_input = row["KipInput"].split("(")[0]
             kip_utf8 = row["KipUnicode"].split("(")[0]
             if not str.isascii(kip_input):
-                logger.warning(f"KipInput is not ascii for {row=}")
+                logger.debug(f"KipInput is not ascii for {row=}")
             else:
                 cin_list.append(
                     CinEntry(

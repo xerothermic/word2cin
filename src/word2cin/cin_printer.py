@@ -39,7 +39,14 @@ def print_cin_entries(
     filtered_cin_data.sort(key=lambda c: c.weight)
     for c in filtered_cin_data:
         if include_source:
-            print(f"{c.key} {c.value};{c.src_name};{c.parse_method};{c.src_col}", file=fp)
+            print(
+                f"{
+                    c.key} {
+                    c.value};{
+                    c.src_name};{
+                    c.parse_method};{
+                        c.src_col}",
+                file=fp)
         else:
             print(f"{c.key} {c.value}", file=fp)
 
@@ -61,5 +68,9 @@ def save_cin(cfgs: list[CinPrinterConfig], cin_data: list[CinEntry]) -> None:
         logger.info(f"{cfg.name} {out_path=}")
         with open(out_path, "w") as fp:
             print_header(cfg.ename, cfg.cname, cfg.selkey, fp)
-            print_cin_entries(cfg.data_sources, cin_data, fp, cfg.include_source)
+            print_cin_entries(
+                cfg.data_sources,
+                cin_data,
+                fp,
+                cfg.include_source)
             print_footer(fp)

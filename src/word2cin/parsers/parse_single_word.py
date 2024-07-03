@@ -51,7 +51,7 @@ class ParseSingleWord(ParseMethodBase):
         for _idx, row in single_word_df.iterrows():
             k = self._get_key(row["KipInput"])
             if not k:
-                logging.warning(f"fail to convert KipInput: {row=}")
+                logger.debug(f"fail to convert KipInput: {row=}")
                 continue
             v1 = row["KipUnicode"]
             cin_entry = self._get_cin_from_unicode(data_source_name, k, v1)
@@ -60,7 +60,7 @@ class ParseSingleWord(ParseMethodBase):
                 continue
             v2 = row["HanLoTaibunKip"]
             if not isinstance(v2, str):
-                logger.warning(f"HanLoTaibunKip is not str for {row=}")
+                logger.debug(f"HanLoTaibunKip is not str for {row=}")
             elif v2.strip() == "":
                 logger.debug(f"{k} has no HanLoTaibunKip")
             else:

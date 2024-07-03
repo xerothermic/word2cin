@@ -21,7 +21,8 @@ def process_chhoe_taigi_data(data_source: DataSourceChhoeTaigiDb):
     cin_list = parse_method_loop(data_source, taigi_df)
     logger.info("cin_list len after parse_method_loop:" + str(len(cin_list)))
     cin_list = post_processing_loop(data_source.post_processing, cin_list)
-    logger.info("cin_list len after post_processing_loop:" + str(len(cin_list)))
+    logger.info("cin_list len after post_processing_loop:" +
+                str(len(cin_list)))
     cin_list = dedup_cin_list(cin_list)
     logger.info("cin_list len after dedup:" + str(len(cin_list)))
     return cin_list
