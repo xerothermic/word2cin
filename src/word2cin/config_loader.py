@@ -18,18 +18,28 @@ class DataSourceType(Enum):
 
 
 @dataclass
-class DataSource:
+class DataSourceBase:
     name: str
     type: DataSourceType
-    path: str
     parse_methods: list[ParseMethodBase]
     post_processing: list[PostProcessingBase]
 
 
 @dataclass
+class DataSourceChhoeTaigiDb(DataSourceBase):
+    path: str
+
+
+@dataclass
+class DataSourceGoogleSheet(DataSourceBase):
+    gsheet_key: str
+    sheet_name: str
+
+
+@dataclass
 class CinPrinterConfig:
     name: str
-    data_sources: list[DataSource]
+    data_sources: list[DataSourceBase]
     ename: str
     cname: str
     selkey: str
@@ -41,7 +51,7 @@ class CinPrinterConfig:
 
 @dataclass
 class Config:
-    data_sources: list[DataSource]
+    data_sources: list[DataSourceBase]
     cin_printer_cfgs: list[CinPrinterConfig]
 
 
@@ -74,14 +84,14 @@ def get_post_processing(data_source_dict) -> list[PostProcessingBase]:
         return post_processing
     for post_processing_option in data_source_dict["postProcessing"]:
         if post_processing_option not in POST_PROCESSING_OPTIONS:
-            logger.warning(
+            logger.info(
                 f"{post_processing_option} does not have an implementation yet.")
             continue
         post_processing.append(POST_PROCESSING_OPTIONS[post_processing_option])
     return post_processing
 
 
-def get_data_sources(yaml_dict) -> list[DataSource]:
+def get_data_sources(yaml_dict) -> list[DataSourceBase]:
     data_sources = []
     if "dataSources" not in yaml_dict:
         raise ValueError("yaml_dict should include dataSources")
@@ -91,13 +101,27 @@ def get_data_sources(yaml_dict) -> list[DataSource]:
             parse_methods = get_parse_methods(ds_vals)
         except ValueError as e:
             raise ValueError(ds_name + str(e)) from e
-        ds = DataSource(
-            ds_name,
-            DataSourceType[ds_vals["type"]],
-            ds_vals["path"],
-            parse_methods,
-            get_post_processing(ds_vals),
-        )
+        type = DataSourceType[ds_vals["type"]]
+        if type == DataSourceType.CHHOE_TAIGI_DATABASE:
+            ds = DataSourceChhoeTaigiDb(
+                name=ds_name,
+                type=type,
+                path=ds_vals["path"],
+                parse_methods=parse_methods,
+                post_processing=get_post_processing(ds_vals),
+            )
+        elif type == DataSourceType.GOOGLE_SHEET:
+            ds = DataSourceGoogleSheet(
+                name=ds_name,
+                type=type,
+                gsheet_key=ds_vals["gsheet_key"],
+                sheet_name=ds_vals["sheet_name"],
+                parse_methods=parse_methods,
+                post_processing=get_post_processing(ds_vals),
+            )
+        else:
+            raise ValueError(f"Unexpected {type=}")
+
         data_sources.append(ds)
     return data_sources
 

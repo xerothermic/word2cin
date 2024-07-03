@@ -103,6 +103,17 @@ dataSources:
         postProcessing:
             - convert_key_to_lower_case
             - add_no_tone
+    GoogleSheet:
+        type: GOOGLE_SHEET
+        gsheet_key: 1BswSQsbcQTJE4i9QbtsY5c3x4i-7Y-1raC0JBN8ekIM
+        sheet_name: v1
+        parseMethods:
+            - parse_single_word_v2
+            - parse_single_word_from_phrase
+            - parse_simple_phrase
+        postProcessing:
+            - convert_key_to_lower_case
+            - add_no_tone
 cinOutputs:
     # new-dict:
     #     dataSources:
@@ -114,13 +125,15 @@ cinOutputs:
     #         # - KamJitian
     #         # - MaryknollTaiengSutian
     #         # - TaioanPehoeKichhooGiku
-    #         - TaioanSitbutMialui
+    #         # - TaioanSitbutMialui
+    #         - GoogleSheet
     #     ename: new-dict-tailo
     #     cname: 台羅
     #     selkey: qwdzxyv
     #     out_filename: new-dict-tailo.cin
+    #     include_source: True
     #     # out_dir: build/
-    nine-dict:
+    ten-dict:
         dataSources:
             - KauiokpooTaigiSutian
             - iTaigiHoataiTuichiautian
@@ -131,12 +144,13 @@ cinOutputs:
             - MaryknollTaiengSutian
             - TaioanPehoeKichhooGiku
             - TaioanSitbutMialui
-        ename: nine-dict-tailo
+            - GoogleSheet
+        ename: ten-dict-tailo
         cname: 台羅
         selkey: qwdzxyv
-        out_filename: nine-dict-tailo.cin
+        out_filename: ten-dict-tailo.cin
         # out_dir: build/
-    nine-dict-debug:
+    ten-dict-debug:
         dataSources:
             - KauiokpooTaigiSutian
             - iTaigiHoataiTuichiautian
@@ -147,9 +161,10 @@ cinOutputs:
             - MaryknollTaiengSutian
             - TaioanPehoeKichhooGiku
             - TaioanSitbutMialui
-        ename: nine-dict-tailo-debug
+            - GoogleSheet
+        ename: ten-dict-tailo-debug
         cname: 台羅
         selkey: qwdzxyv
-        out_filename: nine-dict-tailo-debug.cin
+        out_filename: ten-dict-tailo-debug.cin
         # out_dir: build/
         include_source: True
