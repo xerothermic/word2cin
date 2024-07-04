@@ -133,7 +133,23 @@ cinOutputs:
     #     out_filename: new-dict-tailo.cin
     #     include_source: True
     #     # out_dir: build/
-    ten-dict:
+    chhoe-taigi-dict:
+        dataSources:
+            - KauiokpooTaigiSutian
+            - iTaigiHoataiTuichiautian
+            - TaihoaSoanntengTuichiautian
+            - TaijitToaSutian
+            - EmbreeTaiengSutian
+            - KamJitian
+            - MaryknollTaiengSutian
+            - TaioanPehoeKichhooGiku
+            - TaioanSitbutMialui
+        ename: chhoe-taigi-tailo
+        cname: 揣台語台羅
+        selkey: qwdzxyv
+        out_filename: chhoe-taigi-tailo.cin
+        # include_source: True
+    chhoe-taigi-custom-dict:
         dataSources:
             - KauiokpooTaigiSutian
             - iTaigiHoataiTuichiautian
@@ -145,26 +161,8 @@ cinOutputs:
             - TaioanPehoeKichhooGiku
             - TaioanSitbutMialui
             - GoogleSheet
-        ename: ten-dict-tailo
-        cname: 台羅
+        ename: chhoe-taigi-custom
+        cname: 揣台語和自定義台羅
         selkey: qwdzxyv
-        out_filename: ten-dict-tailo.cin
-        # out_dir: build/
-    ten-dict-debug:
-        dataSources:
-            - KauiokpooTaigiSutian
-            - iTaigiHoataiTuichiautian
-            - TaihoaSoanntengTuichiautian
-            - TaijitToaSutian
-            - EmbreeTaiengSutian
-            - KamJitian
-            - MaryknollTaiengSutian
-            - TaioanPehoeKichhooGiku
-            - TaioanSitbutMialui
-            - GoogleSheet
-        ename: ten-dict-tailo-debug
-        cname: 台羅
-        selkey: qwdzxyv
-        out_filename: ten-dict-tailo-debug.cin
-        # out_dir: build/
-        include_source: True
+        out_filename: chhoe-taigi-custom.cin
+        # include_source: True
