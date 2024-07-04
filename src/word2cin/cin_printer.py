@@ -36,7 +36,7 @@ def print_cin_entries(
     filtered_cin_data = [cin_entry for ds_name, cin_entries in cin_data.items(
     ) if ds_name in data_sources for cin_entry in cin_entries]
     filtered_cin_data = dedup_cin_list(filtered_cin_data)
-    filtered_cin_data.sort(key=lambda c: c.weight)
+    filtered_cin_data.sort(key=lambda c: c.weight, reverse=True)
     for c in filtered_cin_data:
         if include_source:
             print(
