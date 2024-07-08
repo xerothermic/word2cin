@@ -111,6 +111,7 @@ dataSources:
             - parse_single_word_v2
             - parse_single_word_from_phrase
             - parse_simple_phrase
+            - parse_one_to_one
         postProcessing:
             - convert_key_to_lower_case
             - add_no_tone

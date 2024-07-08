@@ -23,6 +23,9 @@ def print_keyname(fp):
     for i in range(1, 10):
         print(f"{i} {i}", file=fp)
 
+    for ch in ",.\\[]":
+        print(f"{ch} {ch}", file=fp)
+
     for c in range(26):
         ch = chr(ord('a') + c)
         if ch in skip_list:

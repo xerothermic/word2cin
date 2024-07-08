@@ -14,7 +14,8 @@ def load_google_sheet_dataframe(
         gsheet_key: str,
         sheet_name: str) -> pd.DataFrame:
     gsheet_url = f"https://docs.google.com/spreadsheets/d/{gsheet_key}/export?/format=xlsx"
-    taigi_df = pd.read_excel(gsheet_url, sheet_name)
+    # NOTE: explicit set below columns to str for pure digit values.
+    taigi_df = pd.read_excel(gsheet_url, sheet_name, dtype={"KipInput": str, "KipUnicode": str, "HanLoTaibunKip": str})
     return taigi_df
 
 
