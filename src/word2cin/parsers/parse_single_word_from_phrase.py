@@ -39,7 +39,7 @@ class ParseSingleWordFromPhrase(ParseMethodBase):
             )
         return cin_list
 
-    def parse(self, src_name: str, taigi_df: pd.DataFrame) -> list[CinEntry]:
+    def parse(self, data_source_name: str, taigi_df: pd.DataFrame) -> list[CinEntry]:
         cin_list = []
         single_phrase_df = taigi_df[
             (~taigi_df.KipInput.str.contains("/", na=False)) &
@@ -50,7 +50,7 @@ class ParseSingleWordFromPhrase(ParseMethodBase):
             if len(kip_input_list) == len(kip_utf8_list):
                 cin_list.extend(
                     self._put_kip_unicode(
-                        src_name,
+                        data_source_name,
                         kip_input_list,
                         kip_utf8_list))
             else:
@@ -67,7 +67,7 @@ class ParseSingleWordFromPhrase(ParseMethodBase):
             if len(kip_input_list) == len(kip_hanlo_list):
                 cin_list.extend(
                     self._put_kip_hanlo(
-                        src_name,
+                        data_source_name,
                         kip_input_list,
                         kip_hanlo_list))
             else:

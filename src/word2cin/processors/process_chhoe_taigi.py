@@ -2,9 +2,7 @@ import logging
 
 import pandas as pd
 
-from word2cin.cin_entry import CinEntry
 from word2cin.config_loader import DataSourceChhoeTaigiDb
-from word2cin.post_processing.post_processing_base import PostProcessingBase
 from word2cin.processors.lib import dedup_cin_list, parse_method_loop, post_processing_loop
 
 logger = logging.getLogger(__name__)

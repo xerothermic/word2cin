@@ -10,4 +10,3 @@ class ConvertKeyToLowerCase(PostProcessingBase):
             c.key = c.key.lower()
         assert not any([c.key[0] == "T" for c in cin_data])
         return cin_data
-

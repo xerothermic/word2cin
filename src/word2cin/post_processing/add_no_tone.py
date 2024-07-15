@@ -5,9 +5,10 @@ from word2cin.post_processing.post_processing_base import PostProcessingBase
 
 logger = logging.getLogger(__name__)
 
+
 class AddNoTone(PostProcessingBase):
     def process(self, cin_data: list[CinEntry]) -> list[CinEntry]:
-        NO_DIGIT_MAP = {ord(str(d)): None for d in (2,3,4,5,7,8)}
+        NO_DIGIT_MAP = {ord(str(d)): None for d in (2, 3, 4, 5, 7, 8)}
         new_cin_data = []
         for c in cin_data:
             no_digit_key = c.key.translate(NO_DIGIT_MAP)

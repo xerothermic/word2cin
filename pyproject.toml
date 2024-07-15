@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "word2cin"
 authors = [{name = "Lôo Giān-tîng", email = "perf.patrick.lu@gmail.com"}]
-version = "0.0.3"
+version = "0.0.4"
 description = "Generate cin input method file from Taigi dictionary sources"
 readme = "README.md"
 requires-python = ">=3.11"

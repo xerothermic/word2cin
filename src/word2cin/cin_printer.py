@@ -1,10 +1,16 @@
 import logging
 import os
+from datetime import datetime as dt
+
 from word2cin.cin_entry import CinEntry
 from word2cin.config_loader import CinPrinterConfig
 from word2cin.processors.process_chhoe_taigi import dedup_cin_list
 
 logger = logging.getLogger(__name__)
+
+
+def print_build_info(fp):
+    print(f"# build time: {dt.now().strftime('%Y-%m-%d %H:%M:%S')}", file=fp)
 
 
 def print_header(ename, cname, selkey, fp):
@@ -56,6 +62,7 @@ def print_cin_entries(
 
 def print_footer(fp):
     print("%chardef end", file=fp)
+    print_build_info(fp)
 
 
 def create_out_dir_if_not_existed(out_dir: str):
@@ -69,7 +76,7 @@ def save_cin(cfgs: list[CinPrinterConfig], cin_data: list[CinEntry]) -> None:
         create_out_dir_if_not_existed(cfg.out_dir)
         out_path = os.path.join(cfg.out_dir, cfg.out_filename)
         logger.info(f"{cfg.name} {out_path=}")
-        with open(out_path, "w") as fp:
+        with open(out_path, "w", encoding="utf-8") as fp:
             print_header(cfg.ename, cfg.cname, cfg.selkey, fp)
             print_cin_entries(
                 cfg.data_sources,

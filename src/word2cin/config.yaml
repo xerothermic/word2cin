@@ -134,6 +134,22 @@ cinOutputs:
     #     out_filename: new-dict-tailo.cin
     #     include_source: True
     #     # out_dir: build/
+    gsheet-dict:
+        dataSources:
+            - GoogleSheet
+        ename: gsheet-taigi
+        cname: 自訂義台羅
+        selkey: qwdzxyv
+        out_filename: gsheet-taigi.cin
+        # include_source: True
+    gsheet-dict-debug:
+        dataSources:
+            - GoogleSheet
+        ename: gsheet-taigi-debug
+        cname: 自訂義台羅
+        selkey: qwdzxyv
+        out_filename: gsheet-taigi-debug.cin
+        include_source: True
     chhoe-taigi-dict:
         dataSources:
             - KauiokpooTaigiSutian

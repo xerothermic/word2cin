@@ -101,19 +101,19 @@ def get_data_sources(yaml_dict) -> list[DataSourceBase]:
             parse_methods = get_parse_methods(ds_vals)
         except ValueError as e:
             raise ValueError(ds_name + str(e)) from e
-        type = DataSourceType[ds_vals["type"]]
-        if type == DataSourceType.CHHOE_TAIGI_DATABASE:
+        ds_type = DataSourceType[ds_vals["type"]]
+        if ds_type == DataSourceType.CHHOE_TAIGI_DATABASE:
             ds = DataSourceChhoeTaigiDb(
                 name=ds_name,
-                type=type,
+                type=ds_type,
                 path=ds_vals["path"],
                 parse_methods=parse_methods,
                 post_processing=get_post_processing(ds_vals),
             )
-        elif type == DataSourceType.GOOGLE_SHEET:
+        elif ds_type == DataSourceType.GOOGLE_SHEET:
             ds = DataSourceGoogleSheet(
                 name=ds_name,
-                type=type,
+                type=ds_type,
                 gsheet_key=ds_vals["gsheet_key"],
                 sheet_name=ds_vals["sheet_name"],
                 parse_methods=parse_methods,
